@@ -1,1 +1,24 @@
-backend/gee-key.json
+# Node dependencies
+node_modules/
+
+# Build files
+build/
+dist/
+
+# Environment files
+.env
+*.env
+
+# Python cache
+__pycache__/
+*.pyc
+
+# Keys and secrets
+/backend/gee-key.json
+
+# Logs
+*.log
+
+# OS/system files
+.DS_Store
+Thumbs.db
