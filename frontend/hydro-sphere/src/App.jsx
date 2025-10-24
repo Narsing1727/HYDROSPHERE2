@@ -16,7 +16,7 @@ import Loader from "./Components/Loader";
 import Transition from "./Components/Transition";
 import ViewProfile from "./Components/ViewProfile";
 import RiskZoning from "./Components/RiskZoning";
-import CityPrediction from "./Components/CItyPrediction";
+import CityPrediction from "./Components/CityPrediction";
 
 
  
