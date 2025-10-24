@@ -1,0 +1,51 @@
+@import "tailwindcss";
+@keyframes gradient-move {
+  0% { background-position: 0% 0%; }
+  100% { background-position: 200% 0%; }
+}
+
+.animate-gradient-move {
+  animation: gradient-move 3s linear infinite;
+}
+@keyframes glowMove {
+  0% {
+    background-position: -50% 0%;
+  }
+  50% {
+    background-position: 150% 0%;
+  }
+  100% {
+    background-position: -50% 0%;
+  }
+}
+
+.animate-glow {
+  background-size: 200% 200%;
+  animation: glowMove 3.5s ease-in-out infinite;
+}
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+.animate-float {
+  animation: float 4s ease-in-out infinite;
+}
+.leaflet-container {
+  z-index: 0 !important;
+}
+/* injected before PDF export */
+.pdf-export-root,
+.pdf-export-root * {
+  background: #ffffff !important;
+  color: #111827 !important;
+  box-shadow: none !important;
+  filter: none !important;
+  -webkit-filter: none !important;
+  outline: none !important;
+}
+.pdf-export-root svg, .pdf-export-root canvas {
+  transform: none !important;
+  will-change: auto !important;
+}
+.pdf-export-root [style*="mix-blend"] { mix-blend-mode: normal !important; }
+.pdf-export-root [style*="backdrop-filter"] { backdrop-filter: none !important; }
