@@ -87,7 +87,7 @@ const {latLng} = useSelector((state) => state.location);
       const margin = 40;
       let y = margin;
 
-      // --- HEADER ---
+    
   doc.setFillColor(10, 93, 173);
 doc.rect(0, 0, W, 70, "F");
 

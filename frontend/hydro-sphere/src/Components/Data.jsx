@@ -1,17 +1,7 @@
-// components/DatasetAvailability.jsx
+
 import React, { useMemo } from "react";
 
-/**
- * DatasetAvailability
- * Props:
- *  - startDate (string, YYYY-MM-DD)
- *  - endDate   (string, YYYY-MM-DD)
- *
- * Usage:
- *  <DatasetAvailability startDate={startDate} endDate={endDate} />
- *
- * The component shows dataset, description, available years, and a status badge.
- */
+
 
 const DATASETS = [
   {
@@ -76,13 +66,10 @@ export default function Data({ startDate, endDate }) {
       const dsFrom = parseDateSafe(ds.availableFrom);
       const dsTo = ds.availableTo === "present" ? new Date() : parseDateSafe(ds.availableTo);
 
-      // status:
-      // - "available": entire user range inside dataset range
-      // - "partial": partially overlaps
-      // - "unavailable": no overlap
+    
       let status = "available";
       if (!start || !end) {
-        // if user didn't provide range, consider dataset available (informational)
+ 
         status = "available";
       } else {
         if (end < dsFrom || start > dsTo) {

@@ -7,6 +7,7 @@ import { motion as m } from "framer-motion";
 import { useState } from "react";
 import axios from "axios"
 import { setUser } from "../redux/userSlice";
+import { BASE_URL } from "../../util";
 const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -28,7 +29,7 @@ const handleForget = async (e) => {
   return;
 }
 
-    const res = await axios.post("http://localhost:5000/api/v1/hydrosphere/auth/forget" , {email : form.email});
+    const res = await axios.post(`${BASE_URL}/api/v1/hydrosphere/auth/forget` , {email : form.email});
     if(res.data.success){
          toast.success(`${res.data.message}`, {
       style: {
@@ -63,7 +64,7 @@ finally{
 try{
 
 
-const res = await axios.post("http://localhost:5000/api/v1/hydrosphere/auth/login" , form ,
+const res = await axios.post(`${BASE_URL}/api/v1/hydrosphere/auth/login` , form ,
   {withCredentials : true}
  );
 console.log(res.data);

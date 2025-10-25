@@ -16,6 +16,7 @@ import Background from "./BackGround";
 import { useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router";
+import { BASE_URL } from "../../util";
 const News = () => {
   const [selectedArticle, setSelectedArticle] = useState(null);
   const [newsData , setNewsData] = useState([]);
@@ -26,7 +27,7 @@ const fetchPost = async () => {
 
    try {
 
-    const res = await axios.get("http://localhost:5000/api/v1/hydrosphere/post/get-post");
+    const res = await axios.get(`${BASE_URL}/api/v1/hydrosphere/post/get-post`);
        const sorted = res.data.allPosts.sort(
         (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
       );
@@ -170,7 +171,7 @@ useEffect(() => {
                     <div className="bg-white rounded-2xl shadow-xl max-w-2xl w-full overflow-hidden">
                       <div className="relative">
                         <img
-                          src = {`http://localhost:5000/${selectedArticle.image}`}
+                          src = {`${BASE_URL}/${selectedArticle.image}`}
                           alt={selectedArticle.title}
                           className="w-full h-60 object-cover"
                         />

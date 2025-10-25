@@ -1,14 +1,14 @@
 import React from "react";
 import { motion as m, AnimatePresence } from "framer-motion";
 import { X } from "lucide-react";
-import Pdf from "./Pdf"; // import your existing Pdf generator component
+import Pdf from "./Pdf"; 
 
 const PdfDialog = ({ isOpen, onClose }) => {
   return (
     <AnimatePresence>
       {isOpen && (
         <>
-          {/* Backdrop */}
+         
           <m.div
             className="fixed  inset-0 bg-black/40 z-40"
             initial={{ opacity: 0 }}
@@ -17,7 +17,7 @@ const PdfDialog = ({ isOpen, onClose }) => {
             onClick={onClose}
           />
 
-          {/* Dialog Box */}
+        
           <m.div
             initial={{ opacity: 0, y: 80, scale: 0.95 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { BASE_URL } from "../../util";
 
 const FloodTest = () => {
   const [lat, setLat] = useState(30.1583);
@@ -15,7 +16,7 @@ const FloodTest = () => {
       setData(null);
 
       const response = await axios.post(
-        "http://localhost:5000/api/v1/hydrosphere/flood-risk",
+        `${BASE_URL}/api/v1/hydrosphere/flood-risk`,
         { lat, lon },
         { headers: { "Content-Type": "application/json" } }
       );

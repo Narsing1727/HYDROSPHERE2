@@ -32,6 +32,7 @@ import SettingsDialog from "./SettingDialog";
 import FeedbackDialog from "./FeedbackDialog";
 import { clearUser } from "../redux/userSlice";
 import { useDispatch } from "react-redux";
+import { BASE_URL } from "../../util";
 const Navigation = ({ onCitySelect }) => {
   const { userInfo } = useSelector((state) => state.user);
   const [showAI, setShowAI] = useState(false);
@@ -45,7 +46,7 @@ const Navigation = ({ onCitySelect }) => {
   const dropdownRef = useRef();
   const navigate = useNavigate();
 const dispatch = useDispatch();
-  // 🔹 City search states
+
   const [query, setQuery] = useState("");
   const [suggestions, setSuggestions] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -123,7 +124,7 @@ const dispatch = useDispatch();
     if (post.image) formData.append("image", post.image);
     try {
       const res = await axios.post(
-        "http://localhost:5000/api/v1/hydrosphere/post/add-post",
+        `${BASE_URL}/api/v1/hydrosphere/post/add-post`,
         formData,
         {
           withCredentials: true,
@@ -154,7 +155,7 @@ const dispatch = useDispatch();
   const logOutHandler = async () => {
     try {
       const res = await axios.get(
-        "http://localhost:5000/api/v1/hydrosphere/auth/logout"
+        `${BASE_URL}/api/v1/hydrosphere/auth/logout`
       );
       if (res.data.success) {
         dispatch(clearUser());

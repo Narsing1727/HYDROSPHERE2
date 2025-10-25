@@ -24,8 +24,7 @@ const LearnMoreDialog = ({ show, onClose }) => {
             transition={{ duration: 0.4, ease: 'easeInOut' }}
           >
             <div className="bg-white/90 backdrop-blur-xl shadow-2xl border border-gray-200 rounded-2xl w-[90%] sm:w-[600px] p-8 relative overflow-hidden">
-              
-              {/* Close Button */}
+         
               <button
                 onClick={onClose}
                 className="absolute top-4 right-4 text-gray-400 hover:text-gray-600 transition"

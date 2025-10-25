@@ -11,6 +11,7 @@ import SideBar from "./SideBar";
 import Navigation from "./Navigation";
 import Background from "./BackGround";
 import axios from "axios";
+import { BASE_URL } from "../../util";
 
 const CityPrediction = () => {
   const [villages, setVillages] = useState([]);
@@ -35,7 +36,7 @@ const CityPrediction = () => {
     const fetchVillages = async () => {
       try {
         const res = await axios.get(
-          "http://localhost:5000/api/v1/hydrosphere/rudraPrayag"
+          `${BASE_URL}/api/v1/hydrosphere/rudraPrayag`
         );
         setVillages(res.data);
       } catch (err) {
@@ -53,7 +54,7 @@ const CityPrediction = () => {
       try {
         setFetching(true);
         const res = await axios.get(
-          `http://localhost:5000/api/v1/hydrosphere/fetch?lat=${selected.lat}&lon=${selected.lon}`
+          `${BASE_URL}/api/v1/hydrosphere/fetch?lat=${selected.lat}&lon=${selected.lon}`
         );
         setFormData(res.data);
       } catch (err) {
@@ -68,7 +69,7 @@ const CityPrediction = () => {
     try {
       setLoading(true);
       const res = await axios.post(
-        "http://localhost:5000/api/v1/hydrosphere/prediction",
+        `${BASE_URL}/api/v1/hydrosphere/prediction`,
         formData
       );
       setResult(res.data);

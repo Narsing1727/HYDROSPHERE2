@@ -16,6 +16,7 @@ import {
 } from "lucide-react";
 import { useLocation, useNavigate, useNavigation } from "react-router-dom";
 import axios from "axios";
+import { BASE_URL } from "../../util";
 
 const SideBar = () => {
   const [collapsed, setCollapsed] = useState(false);
@@ -36,7 +37,7 @@ const SideBar = () => {
   const activePath = location.pathname;
      const logOutHandler = async () => {
         try {
-          const res = await axios.get('http://localhost:5000/api/v1/hydrosphere/auth/logout');
+          const res = await axios.get(`${BASE_URL}/api/v1/hydrosphere/auth/logout`);
           if(res.data.success){
             navigate('/');
             toast.success("Log Out Successfully");

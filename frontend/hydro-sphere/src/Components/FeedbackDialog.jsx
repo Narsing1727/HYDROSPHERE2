@@ -5,6 +5,7 @@ import { motion as m, AnimatePresence } from "framer-motion";
 import toast from "react-hot-toast";
 import axios from "axios";
 import { useSelector } from "react-redux";
+import { BASE_URL } from "../../util";
 
 const FeedbackDialog = ({ show, onClose }) => {
      const { userInfo } = useSelector((state) => state.user);
@@ -30,7 +31,7 @@ const changeHandler = (e) => {
       return;
     }
     try {
-        const res = await axios.post("http://localhost:5000/api/v1/hydrosphere/feedback/send-feedback" , {...feedback , rating});
+        const res = await axios.post(`${BASE_URL}/api/v1/hydrosphere/feedback/send-feedback` , {...feedback , rating});
         if(res.data.success){
             console.log(feedback);
             

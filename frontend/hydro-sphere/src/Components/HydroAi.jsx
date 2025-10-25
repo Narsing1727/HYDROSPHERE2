@@ -3,6 +3,7 @@ import { X, Send, Droplet } from "lucide-react";
 import { motion as m, AnimatePresence } from "framer-motion";
 import axios from "axios";
 import { useSelector } from "react-redux";
+import { BASE_URL } from "../../util";
 
 const HydroAi = ({ show, onClose }) => {
   const {userInfo} = useSelector((state) => state.user);
@@ -47,7 +48,7 @@ const HydroAi = ({ show, onClose }) => {
     try {
       
       const res = await axios.post(
-        "http://localhost:5000/api/v1/hydrosphere/ai/chat",
+        `${BASE_URL}/api/v1/hydrosphere/ai/chat`,
         { message: input ,
           location : aiLoc
         },

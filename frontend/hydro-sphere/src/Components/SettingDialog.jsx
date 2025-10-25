@@ -6,6 +6,7 @@ import toast from "react-hot-toast";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { setUser } from "../redux/userSlice";
+import { BASE_URL } from "../../util";
 
 const SettingsDialog = ({ show, onClose, refreshUser }) => {
   const slideUp = {
@@ -40,7 +41,7 @@ const dispatch = useDispatch();
 
    
       const res = await axios.put(
-        "http://localhost:5000/api/v1/hydrosphere/auth/update",
+        `${BASE_URL}/api/v1/hydrosphere/auth/update`,
         payload,
         { withCredentials: true }
       );

@@ -34,6 +34,7 @@ import SideBar from "./SideBar";
 import Navigation from "./Navigation";
 import { setLocation } from "../redux/locationSlice";
 import { setExact } from "../redux/exactSlice";
+import { BASE_URL } from "../../util";
 
 
 delete L.Icon.Default.prototype._getIconUrl;
@@ -166,7 +167,7 @@ useEffect(() => {
   
 
       const response = await axios.post(
-        "http://localhost:5000/api/v1/hydrosphere/flood-risk",
+        `${BASE_URL}/api/v1/hydrosphere/flood-risk`,
         { lat : latLng?.lat, lon : latLng?.lng},
         { headers: { "Content-Type": "application/json" } }
       );

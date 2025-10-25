@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import { motion as m } from "framer-motion";
 import axios from "axios";
+import { BASE_URL } from "../../util";
 
 const SignUp = () => {
   const navigate = useNavigate();
@@ -36,7 +37,7 @@ const SignUp = () => {
 
       if (action === "send") {
         const res = await axios.post(
-          "http://localhost:5000/api/v1/hydrosphere/auth/send-otp",
+          `${BASE_URL}/api/v1/hydrosphere/auth/send-otp`,
           { email: form.email }
         );
         if (res.data.success) {
@@ -47,7 +48,7 @@ const SignUp = () => {
         }
       } else if (action === "resend") {
         const res = await axios.post(
-          "http://localhost:5000/api/v1/hydrosphere/auth/resend-otp",
+          `${BASE_URL}/api/v1/hydrosphere/auth/resend-otp`,
           { email: form.email }
         );
         if (res.data.success) {

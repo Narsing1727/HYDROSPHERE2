@@ -10,6 +10,7 @@ import { CloudRain, Calendar, MapPin, Droplet } from "lucide-react";
 import { useSelector } from "react-redux";
 import Data from "./Data";
 import ViewInGEE from "./ViewInGEE";
+import { BASE_URL } from "../../util";
 
 const RiskZoning = () => {
   const mapRef = useRef(null);
@@ -35,7 +36,7 @@ const RiskZoning = () => {
     try {
       setLoading(true);
       const res = await axios.post(
-        "http://localhost:5000/api/v1/hydrosphere/risk/zoning",
+        `${BASE_URL}/api/v1/hydrosphere/risk/zoning`,
         {
           lat: latitude,
           lon: longitude,
