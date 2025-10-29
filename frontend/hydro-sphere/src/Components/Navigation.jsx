@@ -118,6 +118,7 @@ const dispatch = useDispatch();
 
   const PublishHandler = async (e) => {
     e.preventDefault();
+     const freshToken = localStorage.getItem("token");
     const formData = new FormData();
     formData.append("title", post.title);
     formData.append("description", post.description);
@@ -128,7 +129,7 @@ const dispatch = useDispatch();
         formData,
         
           {
-          headers: { "Content-Type": "multipart/form-data"  ,  Authorization: `Bearer ${token}`},
+          headers: { "Content-Type": "multipart/form-data"  ,  Authorization: `Bearer ${freshToken}`},
           } 
   
      
