@@ -27,7 +27,7 @@ const Home = () => {
   const { isAuth, userInfo } = useSelector((state) => state.user);
 
 
-const logOutHandler = async () => {
+const handleLogout = async () => {
   try {
     localStorage.removeItem("token");
     dispatch(clearUser());
