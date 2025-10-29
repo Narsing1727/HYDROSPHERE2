@@ -128,15 +128,13 @@ const dispatch = useDispatch();
         `${BASE_URL}/api/v1/hydrosphere/post/add-post`,
         formData,
         
-          {
-          headers: { "Content-Type": "multipart/form-data"  ,  Authorization: `Bearer ${freshToken}`},
-          } 
+        
   
      
     
   
         
-      );
+  );
 
       if (res.data.success) {
         setPost({ title: "", description: "", image: null });

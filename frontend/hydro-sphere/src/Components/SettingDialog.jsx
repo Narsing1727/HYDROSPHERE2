@@ -45,11 +45,8 @@ const dispatch = useDispatch();
     const res = await axios.put(
   `${BASE_URL}/api/v1/hydrosphere/auth/update`,
   payload,
-  {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  }
+ 
+  
 );
 
       if (res.data.success) {
