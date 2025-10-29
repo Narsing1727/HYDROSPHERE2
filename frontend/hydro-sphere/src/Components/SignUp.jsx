@@ -92,7 +92,7 @@ const SignUp = () => {
 
     try {
       const res = await axios.post(
-        "http://localhost:5000/api/v1/hydrosphere/auth/signup",
+        `${BASE_URL}/api/v1/hydrosphere/auth/signup`,
         form
       );
 
