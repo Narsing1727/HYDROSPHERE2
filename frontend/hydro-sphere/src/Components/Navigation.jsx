@@ -42,7 +42,8 @@ const Navigation = ({ onCitySelect }) => {
   const [showFeedback , setShowFeedback] = useState(false);
   const [showPost, setShowPost] = useState(false);
   const [showDropdown, setShowDropdown] = useState(false);
-  
+  const token = localStorage.getItem("token"); 
+
   const dropdownRef = useRef();
   const navigate = useNavigate();
 const dispatch = useDispatch();
@@ -100,7 +101,6 @@ const dispatch = useDispatch();
     return () => document.removeEventListener("mousedown", clickHandler);
   }, []);
 
-  // 🔹 Post form
   const [post, setPost] = useState({
     title: "",
     description: "",
@@ -126,10 +126,15 @@ const dispatch = useDispatch();
       const res = await axios.post(
         `${BASE_URL}/api/v1/hydrosphere/post/add-post`,
         formData,
-        {
-          withCredentials: true,
-          headers: { "Content-Type": "multipart/form-data" },
-        }
+        
+          {
+          headers: { "Content-Type": "multipart/form-data"  ,  Authorization: `Bearer ${token}`},
+          } 
+  
+     
+    
+  
+        
       );
 
       if (res.data.success) {

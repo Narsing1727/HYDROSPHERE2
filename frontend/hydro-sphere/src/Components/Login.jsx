@@ -66,8 +66,7 @@ finally{
 try{
 
 
-const res = await axios.post(`${BASE_URL}/api/v1/hydrosphere/auth/login` , form ,
-  {withCredentials : true}
+const res = await axios.post(`${BASE_URL}/api/v1/hydrosphere/auth/login` , form 
  );
 console.log(res.data);
 if(res.data.success){

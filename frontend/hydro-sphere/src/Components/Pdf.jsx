@@ -76,7 +76,7 @@ const {latLng} = useSelector((state) => state.location);
     try {
       toast.loading("Generating PDF...", { id: "pdf" });
 
-      // Capture chart images
+    
       const rainfallImg = await domtoimage.toPng(rainfallRef.current);
       const solarImg = await domtoimage.toPng(solarRef.current);
       const cloudImg = await domtoimage.toPng(cloudRef.current);

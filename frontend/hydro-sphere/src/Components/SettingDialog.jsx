@@ -14,6 +14,8 @@ const SettingsDialog = ({ show, onClose, refreshUser }) => {
     visible: { y: 0, opacity: 1 },
     exit: { y: 50, opacity: 0 },
   };
+  const token = localStorage.getItem("token");
+
 const {userInfo} = useSelector((state) => state.user);
   const [formData, setFormData] = useState({
     username: userInfo?.username || "",
@@ -40,11 +42,15 @@ const dispatch = useDispatch();
       };
 
    
-      const res = await axios.put(
-        `${BASE_URL}/api/v1/hydrosphere/auth/update`,
-        payload,
-        { withCredentials: true }
-      );
+    const res = await axios.put(
+  `${BASE_URL}/api/v1/hydrosphere/auth/update`,
+  payload,
+  {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  }
+);
 
       if (res.data.success) {
       dispatch(setUser(res.data.user));
