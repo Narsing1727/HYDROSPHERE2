@@ -1,11 +1,11 @@
 const axios = require("axios");
 const fs = require("fs");
-
+const path = require("path");
 
  exports.model = async (req, res) => {
   try {
     const inputData = req.body;
-    const response = await fetch("http://127.0.0.1:8000/predict", {
+    const response = await fetch("https://hydromodel.onrender.com/predict", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ data: inputData }),
@@ -61,8 +61,9 @@ const fs = require("fs");
 
 exports.RudraPrayag = async (req , res) => {
       try {
+         const filePath = path.join(__dirname, "..", "Data", "RudraPrayag.json");
     const data = JSON.parse(
-      fs.readFileSync("./data/RudraPrayag.json", "utf8")
+      fs.readFileSync(filePath, "utf8")
     );
     res.json(data);
   } catch (err) {
