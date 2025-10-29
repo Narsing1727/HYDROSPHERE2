@@ -12,8 +12,9 @@ const News = () => {
   const [selectedArticle, setSelectedArticle] = useState(null);
   const [newsData, setNewsData] = useState([]);
   const navigate = useNavigate();
-
+const [loading , setLoading] = useState(false);
   useEffect(() => {
+    
     const fetchPost = async () => {
       const res = await axios.get(`${BASE_URL}/api/v1/hydrosphere/post/get-post`);
       setNewsData(res.data.allPosts);

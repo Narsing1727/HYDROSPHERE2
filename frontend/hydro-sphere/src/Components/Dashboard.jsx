@@ -35,6 +35,7 @@ import Navigation from "./Navigation";
 import { setLocation } from "../redux/locationSlice";
 import { setExact } from "../redux/exactSlice";
 import { BASE_URL } from "../../util";
+import Loader1 from "./Loader1";
 
 
 delete L.Icon.Default.prototype._getIconUrl;
@@ -195,9 +196,9 @@ useEffect(() => {
       <div className="flex-1 flex flex-col overflow-hidden bg-white">
         <Navigation onCitySelect={(city) => setLatLng({ lat: city.lat, lng: city.lng })} />
 
-        {/* Stats Cards */}
+      
         <div className="pt-7 pl-4 grid grid-cols-4 gap-6 mb-8">
-          {/* Sea & Ground Level */}
+      
           <div className="bg-white rounded-lg shadow-sm p-6 border border-gray-200">
             <div className="flex items-center justify-between mb-2">
               <span className="text-gray-600 text-sm font-medium">Sea Level</span>
@@ -212,7 +213,6 @@ useEffect(() => {
             </div>
           </div>
 
-          {/* Flood Risk */}
           <div className="bg-white rounded-lg shadow-sm p-6 border border-gray-200">
             <div className="flex items-center justify-between mb-2">
               <span className="text-gray-600 text-sm font-medium">Flood Risk Index</span>
@@ -248,11 +248,11 @@ useEffect(() => {
           </div>
         </div>
 
-        {/* Graphs and Map */}
+       
         <div className="flex-1 overflow-y-auto bg-gray-50 p-6">
           <div className="max-w-7xl mx-auto space-y-6">
             <div className="grid grid-cols-2 gap-6">
-              {/* 🌡️ Temperature Chart */}
+           
               <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-5">
                 <div className="flex items-center justify-between mb-4">
                   <h3 className="text-base font-semibold text-gray-800">
@@ -278,7 +278,7 @@ useEffect(() => {
                     </LineChart>
                   </ResponsiveContainer>
                 ) : (
-                  <p className="text-center text-gray-500">No temperature data available.</p>
+                <Loader1/>
                 )}
 
                 <h1 className="text-2xl font-bold text-center mt-2">
@@ -286,7 +286,7 @@ useEffect(() => {
                 </h1>
               </div>
 
-              {/* 🗺️ Map */}
+            
               <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-5">
                 {latLng ? (
                   <MapContainer
@@ -326,12 +326,11 @@ useEffect(() => {
                     </Marker>
                   </MapContainer>
                 ) : (
-                  <p>Loading map...</p>
+                  <Loader1/>
                 )}
               </div>
             </div>
 
-            {/* 🌬️ Wind Speed Chart */}
             <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-5">
               <div className="flex items-center justify-between mb-4">
                 <h3 className="text-base font-semibold text-gray-800">
@@ -357,7 +356,7 @@ useEffect(() => {
                   </LineChart>
                 </ResponsiveContainer>
               ) : (
-                <p className="text-center text-gray-500">No wind data available.</p>
+                <Loader1/>
               )}
             </div>
           </div>
