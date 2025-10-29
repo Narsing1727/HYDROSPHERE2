@@ -69,6 +69,8 @@ try{
 const res = await axios.post(`${BASE_URL}/api/v1/hydrosphere/auth/login` , form 
  );
 console.log(res.data);
+console.log(res.data.token);
+
 if(res.data.success){
   console.log("userdata",res.data.userData);
   

@@ -17,11 +17,22 @@ import Transition from "./Components/Transition";
 import ViewProfile from "./Components/ViewProfile";
 import RiskZoning from "./Components/RiskZoning";
 import CityPrediction from "./Components/CityPrediction";
+import axios from "axios";
 
 
  
 
 const App = () => {
+
+
+axios.interceptors.request.use((config) => {
+  const token = localStorage.getItem("token");
+  if (token) {
+    config.headers.Authorization = `Bearer ${token}`;
+  }
+  return config;
+});
+
   const appRouter = createBrowserRouter([
     {
       element: <Transition />, 

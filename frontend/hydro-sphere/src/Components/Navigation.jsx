@@ -42,7 +42,7 @@ const Navigation = ({ onCitySelect }) => {
   const [showFeedback , setShowFeedback] = useState(false);
   const [showPost, setShowPost] = useState(false);
   const [showDropdown, setShowDropdown] = useState(false);
-  const token = localStorage.getItem("token"); 
+
 
   const dropdownRef = useRef();
   const navigate = useNavigate();
