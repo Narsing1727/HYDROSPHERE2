@@ -73,7 +73,7 @@ console.log(res.data.token);
 
 if(res.data.success){
   console.log("userdata",res.data.userData);
-  
+    localStorage.setItem("token", res.data.token);
   dispatch(setUser(res.data.userData));
    toast.success(`${res.data.message}`, {
       style: {
