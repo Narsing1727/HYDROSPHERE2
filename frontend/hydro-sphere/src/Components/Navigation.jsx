@@ -157,20 +157,22 @@ const dispatch = useDispatch();
     }
   };
 
-  const logOutHandler = async () => {
-    try {
-      const res = await axios.get(
-        `${BASE_URL}/api/v1/hydrosphere/auth/logout`
-      );
-      if (res.data.success) {
-        dispatch(clearUser());
-        navigate("/");
-        toast.success("Log Out Successfully");
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
+const logOutHandler = async () => {
+  try {
+    
+    localStorage.removeItem("token");
+
+    
+    dispatch(clearUser());
+
+    navigate("/");
+
+    toast.success("Log Out Successfully");
+  } catch (error) {
+    console.log("Logout error:", error);
+    toast.error("Something went wrong during logout!");
+  }
+};
 
   const slideRight = {
     hidden: { x: "100%", opacity: 0 },

@@ -26,12 +26,19 @@ const Home = () => {
 
   const { isAuth, userInfo } = useSelector((state) => state.user);
 
-  const handleLogout = () => {
-    if (window.confirm("Logout from HydroSphere?")) {
-      dispatch(clearUser());
-      navigate("/");
-    }
-  };
+
+const logOutHandler = async () => {
+  try {
+    localStorage.removeItem("token");
+    dispatch(clearUser());
+    navigate("/");
+    toast.success("Log Out Successfully");
+  } catch (error) {
+    console.log("Logout error:", error);
+    toast.error("Something went wrong during logout!");
+  }
+};
+
 
   return (
     <div className="min-h-screen flex flex-col bg-gradient-to-b from-blue-50 via-cyan-50 to-white text-gray-800 font-sans overflow-hidden scroll-smooth">
