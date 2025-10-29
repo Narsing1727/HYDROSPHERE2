@@ -62,7 +62,7 @@ const SignUp = () => {
           return;
         }
         const res = await axios.post(
-          "http://localhost:5000/api/v1/hydrosphere/auth/verify-otp",
+          `${BASE_URL}/api/v1/hydrosphere/auth/verify-otp`,
           { email: form.email, otp }
         );
         if (res.data.success) {
