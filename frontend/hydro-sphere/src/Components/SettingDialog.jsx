@@ -52,7 +52,6 @@ const dispatch = useDispatch();
       if (res.data.success) {
       dispatch(setUser(res.data.user));
 
-        console.log(res.data);
         
         toast.success("Profile updated successfully!");
         refreshUser?.(); 
