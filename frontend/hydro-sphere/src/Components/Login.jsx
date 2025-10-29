@@ -24,6 +24,8 @@ const handleForget = async (e) => {
   e.preventDefault();
   setLoading(true);
   try {
+    console.log("Sending email:", form.email);
+
     if (!form.email) {
   toast.error("Please enter your email first!");
   return;

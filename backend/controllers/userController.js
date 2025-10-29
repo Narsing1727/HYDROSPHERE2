@@ -4,10 +4,10 @@ const hash = require("bcryptjs");
 const User = require("../models/User");
 const nodemailer = require("nodemailer");
 const TempUser  = require("../models/TempUser");
+const {Resend} = require("resend");
+const sgMail = require("@sendgrid/mail")
 
-
-console.log("Email function type:", typeof sendVerificationEmail);
-
+sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 exports.Signup = async (req, res) => {
    try {
     const { username, email, phoneNumber, password } = req.body;
@@ -240,6 +240,7 @@ exports.ResendOTP = async (req, res) => {
 };
 exports.SendOTP = async (req, res) => {
   try {
+    
     const { email } = req.body;
 
     if (!email)
@@ -265,27 +266,30 @@ exports.SendOTP = async (req, res) => {
       { upsert: true, new: true }
     );
 
-    const transporter = nodemailer.createTransport({
-      service: "gmail",
-      auth: {
-        user: process.env.SMTP_EMAIL,
-        pass: process.env.SMTP_PASSWORD,
-      },
-    });
 
 
-    await transporter.sendMail({
-      from: `"HydroSphere" <${process.env.SMTP_EMAIL}>`,
+
+     
+       const resend = new Resend(process.env.RESEND_API_KEY);
+
+    const response = await resend.emails.send({
+     from: "HydroSphere <noreply@hydrosphere.tech>",
       to: email,
-      subject: "Your HydroSphere OTP Code",
+      subject: "HydroSphere - Your OTP Code",
       html: `
         <h3>HydroSphere Email Verification</h3>
-        <p>Your OTP for verification is:</p>
+        <p>Your One-Time Password (OTP) for verification is:</p>
         <h2>${otp}</h2>
         <p>This OTP will expire in 5 minutes.</p>
+        <br/>
+        <p>— HydroSphere Team</p>
       `,
     });
 
+
+console.log("Email received from frontend:", email);
+
+console.log("📩 Resend response:", JSON.stringify(response, null, 2));
     res.status(200).json({
       success: true,
       message: "OTP sent successfully to your email!",
@@ -298,9 +302,12 @@ exports.SendOTP = async (req, res) => {
   }
 };
 
+
+
 exports.ForgotPassword = async (req, res) => {
   try {
     const { email } = req.body;
+console.log("BODY:", req.body);
 
     if (!email)
       return res.status(400).json({ success: false, message: "Email is required" });
@@ -311,41 +318,46 @@ exports.ForgotPassword = async (req, res) => {
 
     const tempPassword = Math.random().toString(36).slice(-8);
 
-
     const genSalt = await hash.genSalt(10);
     const hashedTemp = await hash.hash(tempPassword, genSalt);
     user.password = hashedTemp;
     await user.save();
 
- 
-    const transporter = nodemailer.createTransport({
-      service: "gmail",
-      auth: {
-        user: process.env.SMTP_EMAIL,
-        pass: process.env.SMTP_PASSWORD,
+    
+   
+    const to = email;              
+    const fromEmail = "newtongaming36@gmail.com";          
+
+    const msg = {
+      to,
+      from: { email: fromEmail, name: "Hydrosphere" },
+      replyTo: fromEmail,
+      subject: "Hydrosphere Password Reset",
+      text: `Hi, ${user.username} this is a reset password mail from Hydrosphere.`,
+      html: `<p>Your new password is ${tempPassword}</p>`,
+
+     
+      trackingSettings: {
+        clickTracking: { enable: false, enableText: false },
+        openTracking: { enable: false },
       },
-    });
 
-    await transporter.sendMail({
-      from: `"HydroSphere" <${process.env.SMTP_EMAIL}>`,
-      to: email,
-      subject: "HydroSphere - Temporary Password",
-      html: `
-        <h3>Hello ${user.username},</h3>
-        <p>You requested your password. Here’s your new temporary password:</p>
-        <h2>${tempPassword}</h2>
-        <p>Please login using this password and change it from your profile settings.</p>
-        <br/>
-        <p>— HydroSphere Security Team</p>
-      `,
-    });
+      
+      headers: {
+        "List-Unsubscribe-Post": "List-Unsubscribe=One-Click",
+        "List-Unsubscribe": "<mailto:unsubscribe@example.com>, <https://example.com/unsub>",
+      },
+    };
 
-    res.status(200).json({
-      success: true,
-      message: "Temporary password sent to your email!",
+    const [resp] = await sgMail.send(msg);
+    res.json({
+      ok: true,
+      status: resp?.statusCode,
+      id: resp?.headers?.["x-message-id"] || null,
     });
+  
   } catch (error) {
-    console.error("Forgot password error:", error);
-    res.status(500).json({ success: false, message: "Server error" });
+    console.error("Forgot password error:", error.message);
+    res.status(500).json({ success: false, message: error.message });
   }
 };

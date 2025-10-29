@@ -9,6 +9,11 @@ const postRouter = require("./routes/postRoutes");
 const feedRouter = require("./routes/feedRoutes");
 const aIRouter = require("./routes/aIRoutes");
 const riskRouter = require("./routes/riskRoutes");
+const { Resend } = require("resend");
+const { MailerSend, EmailParams, Sender, Recipient } = require("mailersend");
+const nodemailer = require("nodemailer");
+const axios = require("axios")
+
 const PORT = process.env.PORT || 5000;
 app.use(express.json());
 
@@ -16,15 +21,16 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cookie());
 app.use(
   cors({
-    origin: "https://hydrosphere-2.vercel.app/", 
+    origin: "https://hydrosphere-2.vercel.app", 
     credentials: true, 
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
   })
 );
 
-app.get("/", (req, res) => {
-  res.send("🌊 Hydroback server deployed successfully on Railway!");
-});
+
+
+
+
 
 app.use("/api/v1/hydrosphere", floodRouter);
 app.use("/api/v1/hydrosphere/auth" , authRouter);
